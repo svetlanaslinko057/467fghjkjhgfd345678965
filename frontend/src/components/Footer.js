@@ -347,7 +347,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="ys-footer-bottom">
           <div className="ys-container">
-            <p>© 2025 Y-store. Всі права захищені.</p>
+            <p>© 2026 Y-store. Всі права захищені.</p>
           </div>
         </div>
       </footer>
