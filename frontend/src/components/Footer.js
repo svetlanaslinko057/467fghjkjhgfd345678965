@@ -149,7 +149,8 @@ const Footer = () => {
   return (
     <>
       <footer className="ys-footer" data-testid="footer">
-        {/* Map Section */}
+        {/* Map Section - Hidden for logged in users and private pages */}
+        {showMap && (
         <div className="ys-footer-map">
           <iframe
             title="Наше розташування"
@@ -181,6 +182,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        )}
 
         {/* Main Footer Content */}
         <div className="ys-footer-main">
