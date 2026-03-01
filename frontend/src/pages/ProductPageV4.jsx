@@ -211,21 +211,36 @@ export default function ProductPageV4() {
     <div className="ys-page" data-testid="product-page-v4">
       <div className="ys-container ys-section">
         {/* Breadcrumb */}
-        <nav className="ys-breadcrumb" data-testid="breadcrumb">
+        <nav 
+          className="ys-breadcrumb" 
+          data-testid="breadcrumb"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '14px 20px',
+            marginBottom: '24px',
+            background: '#f1f5f9',
+            borderRadius: '12px',
+            border: '1px solid #e2e8f0',
+            fontSize: '14px',
+            fontWeight: '500'
+          }}
+        >
           {breadcrumbs.map((c, i) => (
-            <span key={i}>
+            <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
               {c.to ? (
-                <Link to={c.to} className="ys-link">{c.label}</Link>
+                <Link to={c.to} className="ys-link" style={{ color: '#2563eb', textDecoration: 'none' }}>{c.label}</Link>
               ) : (
-                <span className="ys-muted">{c.label}</span>
+                <span style={{ color: '#475569', fontWeight: '600' }}>{c.label}</span>
               )}
-              {i < breadcrumbs.length - 1 && <ChevronRight size={14} className="ys-breadcrumb-sep" />}
+              {i < breadcrumbs.length - 1 && <ChevronRight size={14} style={{ color: '#94a3b8', flexShrink: 0 }} />}
             </span>
           ))}
         </nav>
 
         {/* Main Product Grid */}
-        <div className="ys-pdp-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '32px', alignItems: 'start' }}>
+        <div className="ys-pdp-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '40px', alignItems: 'start' }}>
           {/* Left: Gallery */}
           <div className="ys-pdp-gallery" style={{ position: 'sticky', top: '100px' }}>
             <GalleryZoom images={images} />
