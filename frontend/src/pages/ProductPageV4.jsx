@@ -354,10 +354,22 @@ export default function ProductPageV4() {
             <div className="ys-contact-row">
               <MessageCircle size={16} />
               <span>{t(L, "Є питання?", "Есть вопросы?")} </span>
-              <a href="/contacts">{t(L, "Напишіть нам", "Напишите нам")}</a>
+              <button 
+                onClick={() => setShowSupportModal(true)}
+                className="text-blue-600 hover:text-blue-700 hover:underline font-medium"
+                data-testid="contact-support-link"
+              >
+                {t(L, "Напишіть нам", "Напишите нам")}
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Support Modal */}
+        <SupportModal 
+          isOpen={showSupportModal} 
+          onClose={() => setShowSupportModal(false)} 
+        />
 
         {/* Buy Together Section */}
         {buyTogether.length > 0 && (
