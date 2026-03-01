@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime, timezone
 from core.db import db
-from core.security import get_current_user, get_admin_user
+from core.security import get_current_user, get_current_admin
 import uuid
 
 router = APIRouter(prefix="/api/support", tags=["Support"])
