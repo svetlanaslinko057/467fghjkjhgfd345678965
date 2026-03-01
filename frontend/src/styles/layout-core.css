@@ -3669,14 +3669,15 @@ body:has(.ys-topbar) .ys-section:first-child {
   border: 1px solid #e5e7eb;
   border-radius: 18px;
   background: #fff;
-  padding: 24px;
+  padding: 28px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 .ys-product-title{
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.3;
   color: #111827;
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
 }
 .ys-product-meta{
   display: flex;
