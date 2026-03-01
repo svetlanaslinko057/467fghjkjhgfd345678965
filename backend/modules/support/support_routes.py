@@ -62,12 +62,8 @@ def serialize_ticket(t: dict) -> dict:
         "updated_at": t.get("updated_at"),
     }
 
-async def send_telegram_notification(ticket: dict, user_name: str, user_email: str):
-    """Send notification to Telegram admin chat"""
-    if not TELEGRAM_BOT_TOKEN:
-        print("TELEGRAM_BOT_TOKEN not set, skipping notification")
-        return
-    
+async def send_telegram_notification(ticket: dict, user_name: str, user_email: str, db):
+    """Send notification to Telegram admin chat via alerts queue"""
     # Find category name
     category_name = next(
         (c["name_uk"] for c in TICKET_CATEGORIES if c["id"] == ticket.get("category")),
@@ -96,28 +92,24 @@ async def send_telegram_notification(ticket: dict, user_name: str, user_email: s
 🔗 Відкрийте адмін-панель для відповіді"""
 
     try:
-        # Try to get admin chat IDs from database or env
-        async with httpx.AsyncClient() as client:
-            # If TELEGRAM_ADMIN_CHAT_ID is set, use it
-            if TELEGRAM_ADMIN_CHAT_ID:
-                chat_ids = [TELEGRAM_ADMIN_CHAT_ID]
-            else:
-                # Otherwise, we'll store ticket and admin can check via bot
-                print("No TELEGRAM_ADMIN_CHAT_ID set, ticket saved but no notification sent")
-                return
-            
-            for chat_id in chat_ids:
-                await client.post(
-                    f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage",
-                    json={
-                        "chat_id": chat_id,
-                        "text": text,
-                        "parse_mode": "HTML"
-                    }
-                )
-                print(f"Telegram notification sent to {chat_id}")
+        # Create alert in queue for bot to process
+        alert = {
+            "id": str(uuid.uuid4()),
+            "type": "support_ticket",
+            "text": text,
+            "payload": {
+                "ticket_id": ticket["id"],
+                "category": ticket["category"],
+                "user_email": user_email
+            },
+            "status": "pending",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "attempts": 0
+        }
+        await db.admin_alerts_queue.insert_one(alert)
+        print(f"Support ticket alert queued: {ticket['id']}")
     except Exception as e:
-        print(f"Failed to send Telegram notification: {e}")
+        print(f"Failed to queue Telegram notification: {e}")
 
 @router.get("/categories")
 async def get_categories():
