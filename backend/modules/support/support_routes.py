@@ -5,10 +5,9 @@ Handles support tickets with Telegram notifications
 
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import Optional
 from datetime import datetime, timezone
-from motor.motor_asyncio import AsyncIOMotorDatabase
-from core.db import get_db
+from core.db import db
 from core.security import get_current_user, get_admin_user
 import uuid
 
