@@ -11,13 +11,8 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from core.db import get_db
 from core.security import get_current_user, get_admin_user
 import uuid
-import httpx
-import os
 
 router = APIRouter(prefix="/api/support", tags=["Support"])
-
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_ADMIN_CHAT_ID = os.environ.get("TELEGRAM_ADMIN_CHAT_ID", "")
 
 # Ticket categories
 TICKET_CATEGORIES = [
