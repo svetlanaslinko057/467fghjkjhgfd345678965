@@ -58,6 +58,7 @@ export default function ProductPageV4() {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [showSupportModal, setShowSupportModal] = useState(false);
 
   useEffect(() => {
     if (id) {
