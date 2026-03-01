@@ -86,7 +86,7 @@ async def send_telegram_notification(ticket: dict, user_name: str, user_email: s
 🔗 Відкрийте адмін-панель для відповіді"""
 
     try:
-        # Create alert in queue for bot to process
+        # Create alert in queue for bot to process (with dedupe_key)
         alert = {
             "id": str(uuid.uuid4()),
             "type": "support_ticket",
@@ -96,9 +96,13 @@ async def send_telegram_notification(ticket: dict, user_name: str, user_email: s
                 "category": ticket["category"],
                 "user_email": user_email
             },
-            "status": "pending",
+            "dedupe_key": f"support_ticket_{ticket['id']}",
+            "status": "PENDING",
+            "reply_markup": None,
             "created_at": datetime.now(timezone.utc).isoformat(),
-            "attempts": 0
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+            "attempts": 0,
+            "next_retry_at": None
         }
         await db.admin_alerts_queue.insert_one(alert)
         print(f"Support ticket alert queued: {ticket['id']}")
