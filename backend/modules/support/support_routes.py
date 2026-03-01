@@ -183,7 +183,7 @@ async def get_ticket(
 @router.get("/admin/tickets")
 async def get_all_tickets(
     status: Optional[str] = None,
-    admin_user: dict = Depends(get_admin_user)
+    admin_user: dict = Depends(get_current_admin)
 ):
     """Get all tickets (admin only)"""
     query = {}
@@ -198,7 +198,7 @@ async def get_all_tickets(
 async def update_ticket_status(
     ticket_id: str,
     data: TicketStatusUpdate,
-    admin_user: dict = Depends(get_admin_user)
+    admin_user: dict = Depends(get_current_admin)
 ):
     """Update ticket status (admin only)"""
     result = await db.support_tickets.update_one(
@@ -218,7 +218,7 @@ async def update_ticket_status(
 async def reply_to_ticket(
     ticket_id: str,
     data: TicketReply,
-    admin_user: dict = Depends(get_admin_user)
+    admin_user: dict = Depends(get_current_admin)
 ):
     """Reply to ticket (admin only)"""
     now = datetime.now(timezone.utc).isoformat()
@@ -249,7 +249,7 @@ async def reply_to_ticket(
 
 @router.get("/admin/stats")
 async def get_support_stats(
-    admin_user: dict = Depends(get_admin_user)
+    admin_user: dict = Depends(get_current_admin)
 ):
     """Get support statistics (admin only)"""
     pipeline = [
