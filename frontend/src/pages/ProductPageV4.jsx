@@ -25,6 +25,7 @@ import { MobileStickyBuyBar } from '../components/mobile';
 import useIsMobile from '../hooks/useIsMobile';
 import { trackProductView, trackAddToCart } from '../lib/track';
 import { addToRecentlyViewed } from '../components/home/RecentlyViewed';
+import SupportModal from '../components/SupportModal';
 
 const t = (lang, uk, ru) => (lang === "ru" ? ru : uk);
 
