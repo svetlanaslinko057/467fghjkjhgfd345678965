@@ -78,6 +78,8 @@ const LegalModal = ({ isOpen, onClose, title, content }) => {
 
 const Footer = () => {
   const { t } = useLanguage();
+  const { user } = useAuth();
+  const location = useLocation();
   const [callbackForm, setCallbackForm] = useState({ name: '', phone: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [headerConfig, setHeaderConfig] = useState(null);
@@ -87,6 +89,13 @@ const Footer = () => {
     privacy: { title: 'Політика конфіденційності', content: '<p>Завантаження...</p>' },
     cookies: { title: 'Політика Cookie', content: '<p>Завантаження...</p>' },
   });
+
+  // Hide map for logged in users or on admin/cabinet pages
+  const isPrivatePage = location.pathname.startsWith('/admin') || 
+                        location.pathname.startsWith('/cabinet') || 
+                        location.pathname.startsWith('/profile') ||
+                        location.pathname.startsWith('/seller');
+  const showMap = !user && !isPrivatePage;
 
   // Fetch header config (for socials sync)
   useEffect(() => {
