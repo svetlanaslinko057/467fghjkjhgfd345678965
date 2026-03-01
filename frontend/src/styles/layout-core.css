@@ -3501,25 +3501,46 @@ body:has(.ys-topbar) .ys-section:first-child {
   padding-bottom: 80px;
 }
 
+/* Breadcrumb Navigation */
 .ys-breadcrumb{
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 20px;
-  font-size: 13px;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  font-size: 14px;
   font-weight: 500;
 }
+.ys-breadcrumb > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 .ys-breadcrumb-sep{
-  margin: 0 2px;
-  color: #9ca3af;
+  margin: 0 4px;
+  color: #94a3b8;
+  flex-shrink: 0;
 }
 .ys-link{
   color: #2563eb;
   text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
 }
 .ys-link:hover{
+  color: #1d4ed8;
   text-decoration: underline;
+}
+.ys-breadcrumb .ys-muted {
+  color: #64748b;
+  font-weight: 600;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ys-pdp-grid{
