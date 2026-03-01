@@ -30,7 +30,11 @@ export const AuthProvider = ({ children }) => {
     try {
       // Try V2 auth first (session cookie)
       const response = await axios.get(`${API_URL}/api/v2/auth/me`, {
-        withCredentials: true
+        withCredentials: true,
+        headers: {
+          // Also send session_token from localStorage as backup
+          'Authorization': localStorage.getItem('session_token') ? `Bearer ${localStorage.getItem('session_token')}` : ''
+        }
       });
       
       if (response.data) {
@@ -46,6 +50,10 @@ export const AuthProvider = ({ children }) => {
       if (storedToken && storedUser) {
         setToken(storedToken);
         setUser(JSON.parse(storedUser));
+      } else {
+        // Clear stale data
+        localStorage.removeItem('session_token');
+        localStorage.removeItem('user');
       }
     } finally {
       setLoading(false);
