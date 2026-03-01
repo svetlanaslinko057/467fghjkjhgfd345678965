@@ -3508,16 +3508,17 @@ body:has(.ys-topbar) .ys-section:first-child {
 
 /* Breadcrumb Navigation */
 .ys-breadcrumb{
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-  padding: 16px 20px;
-  background: #f8fafc;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 500;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 24px !important;
+  padding: 16px 20px !important;
+  background: #f1f5f9 !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border: 1px solid #e2e8f0 !important;
 }
 .ys-breadcrumb > span {
   display: inline-flex;
@@ -3525,8 +3526,8 @@ body:has(.ys-topbar) .ys-section:first-child {
   gap: 8px;
 }
 .ys-breadcrumb-sep{
-  margin: 0 4px;
-  color: #94a3b8;
+  margin: 0 4px !important;
+  color: #94a3b8 !important;
   flex-shrink: 0;
 }
 .ys-link{
@@ -3540,7 +3541,7 @@ body:has(.ys-topbar) .ys-section:first-child {
   text-decoration: underline;
 }
 .ys-breadcrumb .ys-muted {
-  color: #64748b;
+  color: #475569 !important;
   font-weight: 600;
   max-width: 300px;
   overflow: hidden;
