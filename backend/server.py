@@ -3954,6 +3954,10 @@ app.include_router(banners_router, prefix="/api/v2", tags=["Banners"])
 from modules.promo import router as promo_router
 app.include_router(promo_router, prefix="/api", tags=["Promo Codes"])
 
+# Support Tickets Module
+from modules.support import router as support_router
+app.include_router(support_router, tags=["Support"])
+
 # Security Middleware (Rate Limiting, Anti-abuse)
 from modules.security.middleware import SecurityMiddleware
 app.add_middleware(SecurityMiddleware)
