@@ -359,6 +359,19 @@ const AdminPanel = () => {
             <span className="hidden sm:inline">Налаштування</span>
             <span className="sm:hidden">⚙️</span>
           </button>
+          <button
+            onClick={() => setActiveTab('support')}
+            className={`px-5 py-3 font-bold rounded-2xl transition-all duration-300 whitespace-nowrap text-sm md:text-base flex items-center gap-2 ${
+              activeTab === 'support'
+                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-xl scale-105'
+                : 'bg-white text-gray-600 hover:bg-gray-50 hover:scale-105 shadow-md'
+            }`}
+            data-testid="admin-support-tab"
+          >
+            <Headphones className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="hidden sm:inline">Підтримка</span>
+            <span className="sm:hidden">🎧</span>
+          </button>
           </div>
         </div>
 
