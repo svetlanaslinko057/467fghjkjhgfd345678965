@@ -112,10 +112,11 @@ function AppContent() {
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<Navigate to="/cart" />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/account/orders" element={<AccountOrders />} />
           <Route path="/account/orders/:id" element={<OrderDetails />} />
-          <Route path="/account/profile" element={<UserProfile />} />
-          {/* Redirect old routes */}
+          {/* Redirect old routes to unified account */}
+          <Route path="/account/orders" element={<Navigate to="/account" />} />
+          <Route path="/account/profile" element={<Navigate to="/account" />} />
+          <Route path="/account/addresses" element={<Navigate to="/account" />} />
           <Route path="/cabinet" element={<Navigate to="/account" />} />
           <Route path="/cabinet/*" element={<Navigate to="/account" />} />
           <Route path="/profile" element={<Navigate to="/account" />} />
