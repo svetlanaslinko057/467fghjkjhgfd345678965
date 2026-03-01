@@ -144,11 +144,12 @@ async def create_ticket(
     
     await db.support_tickets.insert_one(ticket)
     
-    # Send Telegram notification
+    # Send Telegram notification via alerts queue
     await send_telegram_notification(
         ticket,
         user_name=current_user.get("full_name", "Користувач"),
-        user_email=current_user.get("email", "")
+        user_email=current_user.get("email", ""),
+        db=db
     )
     
     return serialize_ticket(ticket)
