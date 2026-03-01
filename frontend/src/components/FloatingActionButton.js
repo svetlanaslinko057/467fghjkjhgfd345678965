@@ -30,7 +30,7 @@ const FloatingActionButton = () => {
       label: 'Написати email',
       color: 'from-purple-600 to-pink-600',
       action: () => {
-        window.location.href = 'mailto:support@y-store.com';
+        window.location.href = 'mailto:support@y-store.in.ua';
       },
     },
     {
