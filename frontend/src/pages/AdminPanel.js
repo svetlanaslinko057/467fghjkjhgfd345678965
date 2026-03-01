@@ -426,6 +426,9 @@ const AdminPanel = () => {
         {/* Site Settings Tab */}
         {activeTab === 'site-settings' && <SiteSettingsManagement />}
 
+        {/* Support Tickets Tab */}
+        {activeTab === 'support' && <SupportDashboard />}
+
         {/* Users Tab */}
         {activeTab === 'users' && (
           <div className="bg-white rounded-2xl p-6 border border-gray-200">
