@@ -210,7 +210,7 @@ export default function ProductPageV4() {
   const specs = p.specifications || p.attributes || {};
 
   return (
-    <div className="ys-page" data-testid="product-page-v4">
+    <div className="ys-page ys-pdp-page" data-testid="product-page-v4">
       <div className="ys-container ys-section">
         {/* Breadcrumb */}
         <nav 
