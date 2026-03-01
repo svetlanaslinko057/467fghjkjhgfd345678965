@@ -3496,13 +3496,13 @@ body:has(.ys-topbar) .ys-section:first-child {
 /* =========================
    B12: Product Page V4
 ========================= */
-.ys-page{
+.ys-pdp-page {
   padding-top: 24px;
   padding-bottom: 80px;
   background: #f8fafc;
   min-height: 100vh;
 }
-.ys-page .ys-container {
+.ys-pdp-page .ys-container {
   background: transparent;
 }
 
