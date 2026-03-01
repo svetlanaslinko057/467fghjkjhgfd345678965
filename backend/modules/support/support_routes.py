@@ -56,7 +56,7 @@ def serialize_ticket(t: dict) -> dict:
         "updated_at": t.get("updated_at"),
     }
 
-async def send_telegram_notification(ticket: dict, user_name: str, user_email: str, db):
+async def send_telegram_notification(ticket: dict, user_name: str, user_email: str):
     """Send notification to Telegram admin chat via alerts queue"""
     # Find category name
     category_name = next(
@@ -113,7 +113,6 @@ async def get_categories():
 @router.post("/tickets")
 async def create_ticket(
     data: TicketCreate,
-    db: AsyncIOMotorDatabase = Depends(get_db),
     current_user: dict = Depends(get_current_user)
 ):
     """Create a new support ticket (requires auth)"""
@@ -142,15 +141,13 @@ async def create_ticket(
     await send_telegram_notification(
         ticket,
         user_name=current_user.get("full_name", "Користувач"),
-        user_email=current_user.get("email", ""),
-        db=db
+        user_email=current_user.get("email", "")
     )
     
     return serialize_ticket(ticket)
 
 @router.get("/tickets")
 async def get_user_tickets(
-    db: AsyncIOMotorDatabase = Depends(get_db),
     current_user: dict = Depends(get_current_user)
 ):
     """Get tickets for current user"""
@@ -165,7 +162,6 @@ async def get_user_tickets(
 @router.get("/tickets/{ticket_id}")
 async def get_ticket(
     ticket_id: str,
-    db: AsyncIOMotorDatabase = Depends(get_db),
     current_user: dict = Depends(get_current_user)
 ):
     """Get specific ticket"""
@@ -187,7 +183,6 @@ async def get_ticket(
 @router.get("/admin/tickets")
 async def get_all_tickets(
     status: Optional[str] = None,
-    db: AsyncIOMotorDatabase = Depends(get_db),
     admin_user: dict = Depends(get_admin_user)
 ):
     """Get all tickets (admin only)"""
@@ -203,7 +198,6 @@ async def get_all_tickets(
 async def update_ticket_status(
     ticket_id: str,
     data: TicketStatusUpdate,
-    db: AsyncIOMotorDatabase = Depends(get_db),
     admin_user: dict = Depends(get_admin_user)
 ):
     """Update ticket status (admin only)"""
@@ -224,7 +218,6 @@ async def update_ticket_status(
 async def reply_to_ticket(
     ticket_id: str,
     data: TicketReply,
-    db: AsyncIOMotorDatabase = Depends(get_db),
     admin_user: dict = Depends(get_admin_user)
 ):
     """Reply to ticket (admin only)"""
@@ -256,7 +249,6 @@ async def reply_to_ticket(
 
 @router.get("/admin/stats")
 async def get_support_stats(
-    db: AsyncIOMotorDatabase = Depends(get_db),
     admin_user: dict = Depends(get_admin_user)
 ):
     """Get support statistics (admin only)"""
